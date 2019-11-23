@@ -1,0 +1,52 @@
+spring:
+  application:
+    name: seguridad
+  datasource:
+    url: jdbc:postgresql://${postgres_server}:5432/escrutinio
+    #url: jdbc:postgresql://localhost:5432/escrutinio
+    #url: jdbc:postgresql://db-postgres:5432/demo
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    generate-ddl: true  
+    show-sql: true
+#    hibernate:
+#      dialect: org.hibernate.dialect.PostgreSQLDialect
+#      ddl-auto: create-drop
+
+#Component Info  
+info:
+  component: seguridad
+
+#Port - If 0 get random port
+server:
+ port: 8080
+#server: 
+# port: 0
+ 
+#Eureka Instance ID
+#eureka:
+#  instance:
+#    instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+#    leaseRenewalIntervalInSeconds: 5
+#    leaseExpirationDurationInSeconds: 5
+  
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka_server}:8761/eureka
+      #defaultZone: http://localhost:8761/eureka
+        
+#Service Registration Method  
+cloud:
+ services:
+  registrationMethod: route
+  
+#Disable HTTP Basic Authentication
+security:
+   user:
+    name: usersecurity
+    password: 
+  #basic:
+    enabled: true
