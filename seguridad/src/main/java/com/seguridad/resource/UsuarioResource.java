@@ -23,8 +23,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("/api")
-@Api(tags="usuario")
+@RequestMapping("/usuario")
 public class UsuarioResource {
 
 //	 private final Logger log = LoggerFactory.getLogger(SorteoResource.class);

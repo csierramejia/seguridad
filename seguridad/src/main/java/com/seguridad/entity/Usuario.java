@@ -32,5 +32,8 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
+    
+	private String nombreUsuario;
+	private String clave;    
 
  }

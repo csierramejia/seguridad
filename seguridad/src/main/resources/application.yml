@@ -20,7 +20,7 @@ info:
 
 #Port - If 0 get random port
 server:
-# port: 8080
+ port: 8089
 #server: 
- port: 0
+# port: 0
  
