@@ -17,17 +17,15 @@ import com.seguridad.dto.UsuarioDTO;
 import com.seguridad.entity.Usuario;
 import com.seguridad.service.UsuarioService;
 
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("/api")
-@Api(tags="usuario")
+@RequestMapping("/usuario")
 public class UsuarioResource {
 
-//	 private final Logger log = LoggerFactory.getLogger(SorteoResource.class);
+//	 private final Logger log = LoggerFactory.getLogger(UsuarioResource.class);
 	private final UsuarioService usuarioService;
 	
 	public UsuarioResource(UsuarioService sorteoService) {
@@ -59,7 +57,7 @@ public class UsuarioResource {
     	Usuario usuario = new Usuario();
     	BeanUtils.copyProperties(usuarioDTO, usuario);
     	//if (usuario.getId() != null) {
-        //    throw new Exception("A new usuario cannot already have an ID");
+        //    throw new Exception("Un nuevo usuario no puede tener Id");
         //}
         return new ResponseEntity<>(this.usuarioService.save(usuario), HttpStatus.CREATED);
     }
