@@ -9,8 +9,9 @@ import lombok.Data;
 @Data
 public class UsuarioDTO implements Serializable {
 
-	private Long id;
+	private Long idUsuario;
 	private String nombreUsuario;
 	private String clave;
+	private String idEstado;
 	
  }

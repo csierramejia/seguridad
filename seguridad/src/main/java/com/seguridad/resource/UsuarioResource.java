@@ -34,7 +34,7 @@ public class UsuarioResource {
 
 	@GetMapping("/usuarios")	
 	@ApiOperation(value = "Buscar Usuarios", notes = "Operacion para consultar usuarios")
-	@ApiResponses(value = { @ApiResponse(code = 201, message = "Sorteos encontrados"),
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "Usuarios encontrados"),
 			@ApiResponse(code = 404, message = "Usuarios no encontrados") })	
 	public ResponseEntity<List<Usuario>> findAll() {
 		return ResponseEntity.ok(usuarioService.findAll());

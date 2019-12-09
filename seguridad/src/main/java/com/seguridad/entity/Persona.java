@@ -15,21 +15,29 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import lombok.Data;
 
 /**
- * Usuario
+ * Persona
  */
 @Data
 @Entity
-@Table(name = "usuario")
+@Table(name = "persona")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Usuario implements Serializable {
+public class Persona implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
     @Id
-    private Long idUsuario;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
+	private Long idPersona;
     
-	private String nombreUsuario;
-	private String clave;
-	private String idEstado;
+	private String idTipoDocumento;
+	private String numeroDocumento;
+	private String primerNombre; 
+	private String segundoNombre; 
+	private String primerApellido; 
+	private String segundoApellido; 
+	private String direccion; 
+	private String telefono; 
+	private String celular;     
 
  }

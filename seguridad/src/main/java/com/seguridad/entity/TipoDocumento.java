@@ -15,21 +15,20 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import lombok.Data;
 
 /**
- * Usuario
+ * Tipo Documento
  */
 @Data
 @Entity
-@Table(name = "usuario")
+@Table(name = "tipo_documento")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Usuario implements Serializable {
+public class TipoDocumento implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
     @Id
-    private Long idUsuario;
+    private String idTipoDocumento;
     
-	private String nombreUsuario;
-	private String clave;
+	private String descripcion;
 	private String idEstado;
 
  }
