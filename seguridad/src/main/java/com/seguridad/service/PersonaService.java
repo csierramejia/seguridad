@@ -3,6 +3,7 @@ package com.seguridad.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,11 +14,8 @@ import com.seguridad.repository.PersonaRepository;
 @Transactional(readOnly = true)
 public class PersonaService {
 
-	private final PersonaRepository personaRepository;
-
-	public PersonaService(PersonaRepository personaRepository) {
-		this.personaRepository = personaRepository;
-	}
+	@Autowired
+	private PersonaRepository personaRepository;
 
 	public Optional<Persona> findById(Long id) {
 		return this.personaRepository.findById(id);

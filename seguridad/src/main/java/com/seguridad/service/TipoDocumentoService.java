@@ -3,6 +3,7 @@ package com.seguridad.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,11 +14,8 @@ import com.seguridad.repository.TipoDocumentoRepository;
 @Transactional(readOnly = true)
 public class TipoDocumentoService {
 
-	private final TipoDocumentoRepository tipoDocumentoRepository;
-
-	public TipoDocumentoService(TipoDocumentoRepository tipoDocumentoRepository) {
-		this.tipoDocumentoRepository = tipoDocumentoRepository;
-	}
+	@Autowired
+	private TipoDocumentoRepository tipoDocumentoRepository;
 
 	public Optional<TipoDocumento> findById(String id) {
 		return this.tipoDocumentoRepository.findById(id);

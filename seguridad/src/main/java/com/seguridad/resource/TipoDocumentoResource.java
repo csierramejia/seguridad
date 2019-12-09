@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,12 +27,10 @@ import io.swagger.annotations.ApiResponses;
 public class TipoDocumentoResource {
 
 //	 private final Logger log = LoggerFactory.getLogger(TipoDocumentoResource.class);
-	private final TipoDocumentoService tipoDocumentoService;
 	
-	public TipoDocumentoResource(TipoDocumentoService tipoDocumentoService) {
-		this.tipoDocumentoService = tipoDocumentoService;
-	}
-
+	@Autowired
+	private TipoDocumentoService tipoDocumentoService;
+	
 	@GetMapping("/tipo-documentos")	
 	@ApiOperation(value = "Buscar tipos de documento", notes = "Operacion para consultar tipos de documento")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Sorteos encontrados"),
