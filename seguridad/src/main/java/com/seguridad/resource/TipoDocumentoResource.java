@@ -26,8 +26,6 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping("/tipo-documento")
 public class TipoDocumentoResource {
 
-//	 private final Logger log = LoggerFactory.getLogger(TipoDocumentoResource.class);
-	
 	@Autowired
 	private TipoDocumentoService tipoDocumentoService;
 	

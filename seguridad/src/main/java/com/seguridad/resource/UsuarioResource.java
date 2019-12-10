@@ -26,8 +26,6 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping("/usuario")
 public class UsuarioResource {
 
-//	 private final Logger log = LoggerFactory.getLogger(UsuarioResource.class);
-	
 	@Autowired
 	private UsuarioService usuarioService;
 	

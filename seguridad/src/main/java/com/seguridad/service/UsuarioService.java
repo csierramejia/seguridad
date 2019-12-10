@@ -14,8 +14,12 @@ import com.seguridad.repository.UsuarioRepository;
 @Transactional(readOnly = true)
 public class UsuarioService {
 
-	@Autowired
 	private UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	UsuarioService(UsuarioRepository usuarioRepository){
+		this.usuarioRepository = usuarioRepository;
+	}
 
 	public Optional<Usuario> findById(Long id) {
 		return this.usuarioRepository.findById(id);

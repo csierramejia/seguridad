@@ -14,8 +14,12 @@ import com.seguridad.repository.TipoDocumentoRepository;
 @Transactional(readOnly = true)
 public class TipoDocumentoService {
 
-	@Autowired
 	private TipoDocumentoRepository tipoDocumentoRepository;
+	
+	@Autowired
+	TipoDocumentoService(TipoDocumentoRepository tipoDocumentoRepository){
+		this.tipoDocumentoRepository = tipoDocumentoRepository;
+	}
 
 	public Optional<TipoDocumento> findById(String id) {
 		return this.tipoDocumentoRepository.findById(id);

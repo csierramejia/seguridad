@@ -14,8 +14,12 @@ import com.seguridad.repository.PersonaRepository;
 @Transactional(readOnly = true)
 public class PersonaService {
 
-	@Autowired
 	private PersonaRepository personaRepository;
+	
+	@Autowired
+	PersonaService(PersonaRepository personaRepository){
+		this.personaRepository = personaRepository;
+	}
 
 	public Optional<Persona> findById(Long id) {
 		return this.personaRepository.findById(id);

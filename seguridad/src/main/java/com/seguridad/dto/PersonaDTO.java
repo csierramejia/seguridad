@@ -5,7 +5,7 @@ import java.io.Serializable;
 import lombok.Data;
 
 /**
- * Persona
+ * PersonaDTO
  */
 @Data
 public class PersonaDTO implements Serializable {

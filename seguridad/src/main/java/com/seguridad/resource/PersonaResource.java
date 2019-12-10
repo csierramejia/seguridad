@@ -26,8 +26,6 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping("/persona")
 public class PersonaResource {
 
-//	 private final Logger log = LoggerFactory.getLogger(PersonaResource.class);
-	
 	@Autowired
 	private PersonaService personaService;
 	

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import lombok.Data;
 
 /**
- * Usuario
+ * UsuarioDTO
  */
 @Data
 public class UsuarioDTO implements Serializable {
