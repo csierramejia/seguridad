@@ -3,9 +3,9 @@ spring:
     name: seguridad
   datasource:
     #url: jdbc:postgresql://${postgres_server}:5432/seguridad
-    url: jdbc:postgresql://localhost:5432/apuestas
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://instancedbdllo.cbg8artgeyju.us-east-2.rds.amazonaws.com:5432/DBDLLO
+    username: core_application
+    password: c0r3_4ppl1c4t10n
     driver-class-name: org.postgresql.Driver
   jpa:
     generate-ddl: true  
