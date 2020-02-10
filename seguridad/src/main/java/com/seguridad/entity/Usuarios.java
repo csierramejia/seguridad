@@ -16,14 +16,14 @@ import lombok.Data;
  */
 @Data
 @Entity
-@Table(name = "roles")
+@Table(name = "usuarios")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Roles implements Serializable {
+public class Usuarios implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private Long idRol;
-	private String nombre;
-	private String descripcion;
+	private Long idUsuario;
+	private String nombreUsuario;
+	private String clave;
 	private String idEstado;
 }
