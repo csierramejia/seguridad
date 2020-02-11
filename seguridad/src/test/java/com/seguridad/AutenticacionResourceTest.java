@@ -36,7 +36,7 @@ public class AutenticacionResourceTest {
 	@Test
 	public void iniciarSesionExitoso() throws Exception {
 		// url del recurso de inicio de sesion
-		String url = "http://localhost:" + this.port + "/auth/iniciarSesion/";
+		String url = "http://localhost:" + this.port + "/auth/login/";
 
 		// se construye el request con las credenciales existente en BD
 		AutenticacionRequestDTO credenciales = new AutenticacionRequestDTO();
@@ -54,7 +54,7 @@ public class AutenticacionResourceTest {
 	@Test
 	public void iniciarSesionFallido() throws Exception {
 		// url del recurso de inicio de sesion
-		String url = "http://localhost:" + this.port + "/auth/iniciarSesion/";
+		String url = "http://localhost:" + this.port + "/auth/login/";
 
 		// se construye el request con las credenciales NO existente en BD
 		AutenticacionRequestDTO credenciales = new AutenticacionRequestDTO();

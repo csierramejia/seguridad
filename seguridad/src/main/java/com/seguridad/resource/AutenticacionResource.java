@@ -35,7 +35,7 @@ public class AutenticacionResource {
 	 * @param credenciales DTO que contiene los datos de las credenciales
 	 * @return DTO con los datos del response para la autenticacion en el sistema
 	 */
-	@PostMapping(path = "/iniciarSesion",
+	@PostMapping(path = "/login",
 			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ApiOperation(value = "Iniciar Sesion", notes = "Operación para iniciar sesión en el sistema")
