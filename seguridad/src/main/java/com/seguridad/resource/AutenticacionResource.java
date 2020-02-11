@@ -40,8 +40,10 @@ public class AutenticacionResource {
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ApiOperation(value = "Iniciar Sesion", notes = "Operación para iniciar sesión en el sistema")
 	@ApiResponses(value = {
-			@ApiResponse(code = 201, message = "Proceso ejecutado satisfactoriamente"),
-			@ApiResponse(code = 404, message = "Recurso no encontrado") })
+			@ApiResponse(code = 200, message = "Proceso ejecutado satisfactoriamente"),
+			@ApiResponse(code = 400, message = "Se presentó una exception de negocio"),
+			@ApiResponse(code = 404, message = "Recurso no encontrado"),
+			@ApiResponse(code = 500, message = "Internal Server Error")})
 	public ResponseEntity<Object> iniciarSesion(@RequestBody AutenticacionRequestDTO credenciales) {
 		try {
 			return Util.getResponseSuccessful(this.autenticacionService.iniciarSesion(credenciales));
