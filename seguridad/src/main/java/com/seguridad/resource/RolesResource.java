@@ -27,7 +27,7 @@ public class RolesResource {
 	@Autowired
 	private RolesService rolService;
 
-	@GetMapping("/roles")
+	@GetMapping("/find-all")
 	@ApiOperation(value = "Buscar Roles", notes = "Operacion para consultar roles")
 	@ApiResponses(value = {
 			@ApiResponse(code = 201, message = "Roles encontrados"),
@@ -36,7 +36,7 @@ public class RolesResource {
 		return rolService.findAll();
 	}
 
-	@GetMapping("/roles/{id}")
+	@GetMapping("/find-by-id/{id}")
 	@ApiOperation(value = "Buscar Rol", notes = "Operacion para consultar rol por Id")
 	@ApiResponses(value = {
 			@ApiResponse(code = 201, message = "Rol encontrado"),
