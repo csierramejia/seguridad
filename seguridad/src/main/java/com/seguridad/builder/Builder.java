@@ -9,7 +9,6 @@ import org.springframework.beans.BeanUtils;
  * Se debe utiliza este builder para configurar los atributos de una entidad a
  * un DTO para ser enviado al cliente (angular o app movil)
  */
-@SuppressWarnings("deprecation")
 public class Builder<S, T> {
 
 	/** Es el .class del DTO a configurar sus atributos */
