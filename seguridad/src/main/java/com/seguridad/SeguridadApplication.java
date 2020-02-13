@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Clase RAIZ donde se desplega la aplicacion
+ * Clase RAIZ donde se  desplega la aplicacion
  *
  */
 @SpringBootApplication
