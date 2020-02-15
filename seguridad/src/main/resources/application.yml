@@ -7,6 +7,11 @@ spring:
     username: core_application
     password: c0r3_4ppl1c4t10n
     driver-class-name: org.postgresql.Driver
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 5
+      idle-timeout: 10000
+      poolName: poolSeguridad    
   jpa:
     generate-ddl: true  
     show-sql: true
