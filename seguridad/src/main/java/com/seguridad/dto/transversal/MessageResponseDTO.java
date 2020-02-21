@@ -1,4 +1,4 @@
-package com.seguridad.dto;
+package com.seguridad.dto.transversal;
 
 import java.io.Serializable;
 

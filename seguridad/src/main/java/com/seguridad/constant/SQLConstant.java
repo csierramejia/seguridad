@@ -5,6 +5,14 @@ package com.seguridad.constant;
  */
 public class SQLConstant {
 
-	/** SQL para obtener el usuario a partir de su clave y usuario*/
-	public static final String GET_USER_CLAVE = "SELECT ID_USUARIO FROM USUARIOS WHERE CLAVE=? AND NOMBRE_USUARIO=?";
+	/** SQL para obtener los datos personales del usuario con base a sus credenciales*/
+	public static final String GET_USER_AUTH =
+		  "SELECT "
+			+ "U.ID_USUARIO,"
+			+ "P.PRIMER_NOMBRE,"
+			+ "P.SEGUNDO_NOMBRE,"
+			+ "P.PRIMER_APELLIDO,"
+			+ "P.SEGUNDO_APELLIDO "
+		+ "FROM PERSONAS P "
+		+ "JOIN USUARIOS U ON(U.ID_USUARIO=P.ID_PERSONA)WHERE U.CLAVE=? AND U.NOMBRE_USUARIO=?";
 }

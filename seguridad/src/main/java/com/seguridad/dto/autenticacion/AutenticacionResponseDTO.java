@@ -1,4 +1,4 @@
-package com.seguridad.dto;
+package com.seguridad.dto.autenticacion;
 
 import java.io.Serializable;
 
@@ -11,6 +11,6 @@ import lombok.Data;
 public class AutenticacionResponseDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	/** identificador del Usuario */
-	private Long idUsuario;
+	/** son los datos del usuario autenticado */
+	private UsuarioDTO usuario;
 }

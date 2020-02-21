@@ -12,7 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.seguridad.dto.AutenticacionRequestDTO;
+import com.seguridad.dto.autenticacion.AutenticacionRequestDTO;
 
 /**
  * Test para los procesos de negocio del recuros http://localhost:port/auth/

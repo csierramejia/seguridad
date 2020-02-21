@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.seguridad.dto.AutenticacionRequestDTO;
+import com.seguridad.dto.autenticacion.AutenticacionRequestDTO;
 import com.seguridad.service.AutenticacionService;
 import com.seguridad.util.BusinessException;
 import com.seguridad.util.Util;

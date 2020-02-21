@@ -3,7 +3,7 @@ package com.seguridad.util;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.seguridad.dto.MessageResponseDTO;
+import com.seguridad.dto.transversal.MessageResponseDTO;
 
 /**
  * Clase que contiene los metodo utilitarios del sistema
@@ -59,5 +59,12 @@ public class Util {
 			error = "Exception lanzada por NullPointerException.";
 		}
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new MessageResponseDTO(metodo + error));
+	}
+
+	/**
+	 * Metodo que permite obtener un valor de un array de objecto
+	 */
+	public static String getValue(Object[] data, Integer index) {
+		return data[index] != null ? data[index].toString() : null;
 	}
 }
