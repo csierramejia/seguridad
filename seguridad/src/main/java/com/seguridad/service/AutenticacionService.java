@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.seguridad.constant.Estado;
 import com.seguridad.constant.MessagesBussinesKey;
 import com.seguridad.constant.Numero;
 import com.seguridad.constant.SQLConstant;
@@ -47,6 +48,7 @@ public class AutenticacionService {
 			Query q = this.em.createNativeQuery(SQLConstant.GET_USER_AUTH);
 			q.setParameter(Numero.UNO.valueI, credenciales.getClaveIngreso());
 			q.setParameter(Numero.DOS.valueI, credenciales.getUsuarioIngreso());
+			q.setParameter(Numero.TRES.valueI, Estado.ACTIVO);
 			List<Object> result = q.getResultList();
 
 			// se verifica que si exista el usuario
