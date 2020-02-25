@@ -1,4 +1,4 @@
-package com.seguridad;
+package com.seguridad.autenticacion;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,12 +15,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.seguridad.dto.autenticacion.AutenticacionRequestDTO;
 
 /**
- * Test para los procesos de negocio del recuros http://localhost:port/auth/
+ * Test para el proceso de negocio de inicio de sesion
+ * http://localhost:port/auth/login
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-public class AutenticacionResourceTest {
+public class IniciarSesionTest {
 
 	/** Es un random puerto para hacer el llamado a los rest */
 	@LocalServerPort

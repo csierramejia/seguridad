@@ -3,6 +3,7 @@ package com.seguridad.util;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.seguridad.constant.Numero;
 import com.seguridad.dto.transversal.MessageResponseDTO;
 
 /**

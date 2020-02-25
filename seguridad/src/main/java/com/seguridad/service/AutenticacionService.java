@@ -10,12 +10,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.seguridad.constant.MessagesBussinesKey;
+import com.seguridad.constant.Numero;
 import com.seguridad.constant.SQLConstant;
 import com.seguridad.dto.autenticacion.AutenticacionRequestDTO;
 import com.seguridad.dto.autenticacion.AutenticacionResponseDTO;
 import com.seguridad.dto.autenticacion.UsuarioDTO;
+import com.seguridad.dto.bienvenida.BienvenidaRequestDTO;
+import com.seguridad.dto.bienvenida.BienvenidaResponseDTO;
 import com.seguridad.util.BusinessException;
-import com.seguridad.util.Numero;
 import com.seguridad.util.Util;
 
 /**
@@ -23,6 +25,7 @@ import com.seguridad.util.Util;
  */
 @Service
 @Transactional(readOnly = true)
+@SuppressWarnings("unchecked")
 public class AutenticacionService {
 
 	/** Contexto de la persistencia del sistema */
@@ -35,7 +38,6 @@ public class AutenticacionService {
 	 * @param credenciales DTO que contiene los datos de las credenciales
 	 * @return DTO con los datos del response para la autenticacion en el sistema
 	 */
-	@SuppressWarnings("unchecked")
 	public AutenticacionResponseDTO iniciarSesion(AutenticacionRequestDTO credenciales) throws Exception {
 		if (credenciales != null &&
 			!Util.isNull(credenciales.getClaveIngreso()) &&
@@ -70,5 +72,16 @@ public class AutenticacionService {
 			throw new BusinessException(MessagesBussinesKey.KEY_AUTENTICACION_FALLIDA.value);
 		}
 		throw new BusinessException(MessagesBussinesKey.KEY_CREDENCIALES_INCORRECTOS.value);
+	}
+
+	/**
+	 * Servicio para obtener los datos necesarios de bienvenida de la app
+	 * cuando la autenticacion es OK
+	 *
+	 * @param data, parametros necesarios para obtener los datos de bienvenida
+	 * @return DTO con los datos configurados para la bienvenida de la app
+	 */
+	public BienvenidaResponseDTO getDatosBienvenida(BienvenidaRequestDTO data) throws Exception {
+		return null;
 	}
 }

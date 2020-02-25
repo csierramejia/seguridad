@@ -1,4 +1,4 @@
-package com.seguridad.util;
+package com.seguridad.constant;
 
 /**
  * Enums que contiene los valores númericos del sistema

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.seguridad.dto.autenticacion.AutenticacionRequestDTO;
+import com.seguridad.dto.bienvenida.BienvenidaRequestDTO;
 import com.seguridad.service.AutenticacionService;
 import com.seguridad.util.BusinessException;
 import com.seguridad.util.Util;
@@ -51,6 +52,30 @@ public class AutenticacionResource {
 			return Util.getResponseBadRequest(e.getMessage());
 		} catch (Exception e) {
 			return Util.getResponseError(AutenticacionResource.class.getSimpleName() + ".iniciarSesion ", e.getMessage());
+		}
+	}
+
+	/**
+	 * Servicio para obtener los datos necesarios de bienvenida de la app
+	 * cuando la autenticacion es OK
+	 *
+	 * @param data, parametros necesarios para obtener los datos de bienvenida
+	 * @return DTO con los datos configurados para la bienvenida de la app
+	 */
+	@PostMapping(path = "/bienvenida",
+			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ApiOperation(value = "Bienvenida", notes = "Operación para obtener los datos necesarios de bienvenida de la app")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Proceso ejecutado satisfactoriamente"),
+			@ApiResponse(code = 400, message = "Se presentó una exception de negocio"),
+			@ApiResponse(code = 404, message = "Recurso no encontrado"),
+			@ApiResponse(code = 500, message = "Internal Server Error")})
+	public ResponseEntity<Object> getDatosBienvenida(@RequestBody BienvenidaRequestDTO data) {
+		try {
+			return Util.getResponseSuccessful(this.autenticacionService.getDatosBienvenida(data));
+		} catch (Exception e) {
+			return Util.getResponseError(AutenticacionResource.class.getSimpleName() + ".getDatosBienvenida ", e.getMessage());
 		}
 	}
 }
