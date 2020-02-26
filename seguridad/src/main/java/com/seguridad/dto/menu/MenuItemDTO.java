@@ -14,19 +14,22 @@ public class MenuItemDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/** identificador del item */
-	private Long idItem;
+	private String id;
 
 	/** Es el label que se visualiza en pantalla */
 	private String label;
 
 	/** Es la descripcion que se visualiza en el tooltip del menu */
-	private String descripcion;
+	private String title;
 
 	/** es el icono a visualizar al lado del item */
-	private String icono;
+	private String icon;
 
 	/** es la url a redireccionar cuando le dan click al item */
-	private String url;
+	private String routerLink;
+
+	/** indica si el item padre debe estar expandido */
+	private boolean expanded;
 
 	/** son los items de este item o modulo */
 	private List<MenuItemDTO> items;
@@ -57,11 +60,11 @@ public class MenuItemDTO implements Serializable {
 	/**
 	 * Metodo que permite buscar un item a partir de su identificador
 	 */
-	public MenuItemDTO getItemMenu(Long id) {
+	public MenuItemDTO getItemMenu(String id) {
 		MenuItemDTO item = null;
 		if (this.items != null && !this.items.isEmpty()) {
 			for (MenuItemDTO menuItem: this.items) {
-				if (menuItem.getIdItem().equals(id)) {
+				if (menuItem.getId().equals(id)) {
 					item = menuItem;
 					break;
 				}

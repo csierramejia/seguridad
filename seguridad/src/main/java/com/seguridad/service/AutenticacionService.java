@@ -107,8 +107,8 @@ public class AutenticacionService {
 			if (result != null && !result.isEmpty()) {
 
 				// se recorre cada item a configurar en el response
-				Long idItemPadre;
-				Long idItemHijo;
+				String idItemPadre;
+				String idItemHijo;
 				MenuItemDTO itemPadre;
 				MenuItemDTO itemHijo;
 				String estadoAccion;
@@ -116,8 +116,8 @@ public class AutenticacionService {
 				for (Object[] item : result) {
 
 					// se obtiene el identificador del item padre y el hijo
-					idItemPadre = Long.valueOf(Util.getValue(item, Numero.ZERO.valueI));
-					idItemHijo = Long.valueOf(Util.getValue(item, Numero.TRES.valueI));
+					idItemPadre = Util.getValue(item, Numero.ZERO.valueI);
+					idItemHijo = Util.getValue(item, Numero.TRES.valueI);
 					itemHijo = null;
 
 					// se procede a buscar recursivamente los datos del item padre
@@ -126,9 +126,11 @@ public class AutenticacionService {
 					// si no existe el item padre se debe crear
 					if (itemPadre == null) {
 						itemPadre = new MenuItemDTO();
-						itemPadre.setIdItem(idItemPadre);
+						itemPadre.setId(idItemPadre);
 						itemPadre.setLabel(Util.getValue(item, Numero.UNO.valueI));
-						itemPadre.setDescripcion(Util.getValue(item, Numero.DOS.valueI));
+						itemPadre.setTitle(Util.getValue(item, Numero.DOS.valueI));
+						itemPadre.setIcon(Util.getValue(item, Numero.ONCE.valueI));
+						itemPadre.setExpanded(true);
 
 						// se agrega el item padre al response
 						response.agregarItem(itemPadre);
@@ -140,10 +142,12 @@ public class AutenticacionService {
 					// se construye los datos del item hijo si no existe
 					if (itemHijo == null) {
 						itemHijo = new MenuItemDTO();
-						itemHijo.setIdItem(Long.valueOf(idItemHijo));
+						itemHijo.setId(idItemHijo);
 						itemHijo.setLabel(Util.getValue(item, Numero.CUATRO.valueI));
-						itemHijo.setDescripcion(Util.getValue(item, Numero.CINCO.valueI));
-						itemHijo.setUrl(Util.getValue(item, Numero.SEIS.valueI));
+						itemHijo.setTitle(Util.getValue(item, Numero.CINCO.valueI));
+						itemHijo.setRouterLink(Util.getValue(item, Numero.SEIS.valueI));
+						itemHijo.setIcon(Util.getValue(item, Numero.DIEZ.valueI));
+						itemHijo.setExpanded(true);
 						itemPadre.agregarItem(itemHijo);
 					}
 
@@ -168,7 +172,7 @@ public class AutenticacionService {
 	 * @param items, contiene todos los items del menu
 	 * @param id, identificador del item principal a buscar
 	 */
-	private MenuItemDTO findItemPrincipal(List<MenuItemDTO> items, Long id) {
+	private MenuItemDTO findItemPrincipal(List<MenuItemDTO> items, String id) {
 		MenuItemDTO itemPadre = null;
 		for (MenuItemDTO item : items) {
 			if (item.getItems() != null && !item.getItems().isEmpty()) {
@@ -177,7 +181,7 @@ public class AutenticacionService {
 					break;
 				}
 			}
-			if (item.getIdItem().equals(id)) {
+			if (item.getId().equals(id)) {
 				itemPadre = item;
 				break;
 			}
