@@ -11,6 +11,9 @@ import lombok.Data;
 public class MenuItemAccionDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	/** nombre del accion del item */
+	private String nombre;
+
 	/** identificador del accion del item */
 	private Long idAccion;
 }

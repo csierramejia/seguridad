@@ -1,6 +1,7 @@
 package com.seguridad.dto.bienvenida;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.seguridad.dto.menu.MenuItemDTO;
@@ -16,4 +17,14 @@ public class BienvenidaResponseDTO implements Serializable {
 
 	/** son los items del menu */
 	private List<MenuItemDTO> itemsMenu;
+
+	/**
+	 * Metodo que permite agregar un item para el menu de la app
+	 */
+	public void agregarItem(MenuItemDTO item) {
+		if (this.itemsMenu == null) {
+			this.itemsMenu = new ArrayList<>();
+		}
+		this.itemsMenu.add(item);
+	}
 }
