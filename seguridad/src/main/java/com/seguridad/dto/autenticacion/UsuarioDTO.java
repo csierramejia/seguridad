@@ -5,7 +5,7 @@ import java.io.Serializable;
 import lombok.Data;
 
 /**
- * DTO para encapsular los datos personales del usuario para la autenticacion
+ * DTO para encapsular los datos personales del usuario autenticado
  */
 @Data
 public class UsuarioDTO implements Serializable {
