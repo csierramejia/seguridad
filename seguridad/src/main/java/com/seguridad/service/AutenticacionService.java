@@ -8,7 +8,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.seguridad.constant.AplicacionConstant;
 import com.seguridad.constant.Estado;
@@ -29,7 +28,6 @@ import com.seguridad.util.Util;
  * Service para que contiene los procesos de negocio para la autenticacion
  */
 @Service
-@Transactional(readOnly = true)
 @SuppressWarnings("unchecked")
 public class AutenticacionService {
 
