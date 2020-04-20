@@ -75,7 +75,7 @@ public class AutenticacionService {
 			}
 			throw new BusinessException(MessagesBussinesKey.KEY_AUTENTICACION_FALLIDA.value);
 		}
-		throw new BusinessException(MessagesBussinesKey.KEY_CREDENCIALES_INCORRECTOS.value);
+		throw new BusinessException(MessagesBussinesKey.KEY_AUTENTICACION_FALLIDA.value);
 	}
 
 	/**

@@ -5,11 +5,8 @@ package com.seguridad.constant;
  */
 public enum MessagesBussinesKey {
 
-	/** 400 - El Usuario y la Contraseña que ingresó no ha sido reconocido. */
-	KEY_AUTENTICACION_FALLIDA("security-0001"),
-
-	/** 400 - Las credenciales para la autenticación son incorrectos. */
-	KEY_CREDENCIALES_INCORRECTOS("security-0002");
+	/** 400 - Credenciales incorrectas. Inténtalo de nuevo. */
+	KEY_AUTENTICACION_FALLIDA("security-0001");
 
 	public final String value;
 	private MessagesBussinesKey(String value) {
