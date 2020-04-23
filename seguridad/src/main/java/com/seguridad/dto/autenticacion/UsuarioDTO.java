@@ -14,15 +14,9 @@ public class UsuarioDTO implements Serializable {
 	/** identificador del Usuario */
 	private Long idUsuario;
 
-	/** Es el primer nombre del usuario */
-	private String primerNombre;
+	/** Es el nombre completo del usuario */
+	private String nombreCompleto;
 
-	/** Es el segundo nombre del usuario */
-	private String segundoNombre;
-
-	/** Es el primer apellido del usuario */
-	private String primerApellido;
-
-	/** Es el segundo apellido del usuario */
-	private String segundoApellido;
+	/** Son los nombres de los roles asignados al usuario */
+	private String roles;
 }

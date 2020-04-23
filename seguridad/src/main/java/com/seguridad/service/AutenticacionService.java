@@ -50,22 +50,19 @@ public class AutenticacionService {
 			Query q = this.em.createNativeQuery(SQLConstant.GET_USER_AUTH);
 			q.setParameter(Numero.UNO.valueI, credenciales.getClaveIngreso());
 			q.setParameter(Numero.DOS.valueI, credenciales.getUsuarioIngreso());
-			q.setParameter(Numero.TRES.valueI, Estado.ACTIVO);
 			List<Object> result = q.getResultList();
 
 			// se verifica que si exista el usuario
 			if (result != null && !result.isEmpty()) {
 				Object[] data = (Object[]) result.get(Numero.ZERO.valueI);
 				Long idUsuario = Long.valueOf(Util.getValue(data, Numero.ZERO.valueI));
-				if (!idUsuario.equals(Numero.ZERO.valueL)) {
+				if (idUsuario != null && !idUsuario.equals(Numero.ZERO.valueL)) {
 
 					// se construye el DTO con los datos personales del usuario
 					UsuarioDTO usuario = new UsuarioDTO();
 					usuario.setIdUsuario(idUsuario);
-					usuario.setPrimerNombre(Util.getValue(data, Numero.UNO.valueI));
-					usuario.setSegundoNombre(Util.getValue(data, Numero.DOS.valueI));
-					usuario.setPrimerApellido(Util.getValue(data, Numero.TRES.valueI));
-					usuario.setSegundoApellido(Util.getValue(data, Numero.CUATRO.valueI));
+					usuario.setNombreCompleto(Util.getValue(data, Numero.UNO.valueI));
+					usuario.setRoles(Util.getValue(data, Numero.DOS.valueI));
 
 					// se construye el response con los datos configurados
 					AutenticacionResponseDTO response = new AutenticacionResponseDTO();
