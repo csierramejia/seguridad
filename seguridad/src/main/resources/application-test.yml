@@ -25,9 +25,16 @@ spring:
 info:
   component: seguridad
 
+management:
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: gateway,health,info
+        
 #Port - If 0 get random port
 server:
- port: 8090
+ port: 8089
 #server: 
 # port: 0
  
