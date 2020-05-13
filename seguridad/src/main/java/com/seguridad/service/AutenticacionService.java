@@ -82,8 +82,8 @@ public class AutenticacionService {
 						response.setUsuario(usuario);
 						return response;
 					}
-					throw new BusinessException(MessagesBussinesKey.KEY_AUTENTICACION_FALLIDA.value);
 				}
+				throw new BusinessException(MessagesBussinesKey.KEY_AUTENTICACION_FALLIDA.value);
 			}
 			throw new BusinessException(MessagesBussinesKey.KEY_AUTENTICACION_FALLIDA.value);
 		}
