@@ -7,6 +7,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.seguridad.constant.AplicacionConstant;
@@ -35,39 +38,51 @@ public class AutenticacionService {
 	@PersistenceContext
 	private EntityManager em;
 
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
 	/**
-	 * Servicio que soporta el proceso de negocio para la autenticacion en el sistema
+	 * Servicio que soporta el proceso de negocio para la autenticacion en el
+	 * sistema
 	 *
 	 * @param credenciales DTO que contiene los datos de las credenciales
 	 * @return DTO con los datos del response para la autenticacion en el sistema
 	 */
 	public AutenticacionResponseDTO iniciarSesion(AutenticacionRequestDTO credenciales) throws Exception {
-		if (credenciales != null &&
-			!Util.isNull(credenciales.getClaveIngreso()) &&
-			!Util.isNull(credenciales.getUsuarioIngreso())) {
+		if (credenciales != null && !Util.isNull(credenciales.getClaveIngreso())
+				&& !Util.isNull(credenciales.getUsuarioIngreso())) {
 
 			// se consulta el identificador del usuario que coincida con la clave-usuario
 			Query q = this.em.createNativeQuery(SQLConstant.GET_USER_AUTH);
-			q.setParameter(Numero.UNO.valueI, credenciales.getClaveIngreso());
-			q.setParameter(Numero.DOS.valueI, credenciales.getUsuarioIngreso());
+			q.setParameter(Numero.UNO.valueI, credenciales.getUsuarioIngreso());
 			List<Object> result = q.getResultList();
 
 			// se verifica que si exista el usuario
 			if (result != null && !result.isEmpty()) {
 				Object[] data = (Object[]) result.get(Numero.ZERO.valueI);
-				Long idUsuario = Long.valueOf(Util.getValue(data, Numero.ZERO.valueI));
-				if (idUsuario != null && !idUsuario.equals(Numero.ZERO.valueL)) {
+				if (passwordEncoder.matches(credenciales.getClaveIngreso(),
+						Util.getValue(data, Numero.CUATRO.valueI))) {
+					Long idUsuario = Long.valueOf(Util.getValue(data, Numero.ZERO.valueI));
+					if (idUsuario != null && !idUsuario.equals(Numero.ZERO.valueL)) {
 
-					// se construye el DTO con los datos personales del usuario
-					UsuarioDTO usuario = new UsuarioDTO();
-					usuario.setIdUsuario(idUsuario);
-					usuario.setNombreCompleto(Util.getValue(data, Numero.UNO.valueI));
-					usuario.setRoles(Util.getValue(data, Numero.DOS.valueI));
-
-					// se construye el response con los datos configurados
-					AutenticacionResponseDTO response = new AutenticacionResponseDTO();
-					response.setUsuario(usuario);
-					return response;
+						// se construye el DTO con los datos personales del usuario
+						UsuarioDTO usuario = new UsuarioDTO();
+						usuario.setIdUsuario(idUsuario);
+						usuario.setNombreCompleto(Util.getValue(data, Numero.UNO.valueI));
+						usuario.setRoles(Util.getValue(data, Numero.DOS.valueI));
+						usuario.setPrimerIngreso(Long.valueOf(Util.getValue(data, Numero.TRES.valueI)));
+						usuario.setClave(Util.getValue(data, Numero.CUATRO.valueI));
+						// se construye el response con los datos configurados
+						AutenticacionResponseDTO response = new AutenticacionResponseDTO();
+						response.setUsuario(usuario);
+						return response;
+					}
+					throw new BusinessException(MessagesBussinesKey.KEY_AUTENTICACION_FALLIDA.value);
 				}
 			}
 			throw new BusinessException(MessagesBussinesKey.KEY_AUTENTICACION_FALLIDA.value);
@@ -76,8 +91,8 @@ public class AutenticacionService {
 	}
 
 	/**
-	 * Servicio para obtener los datos necesarios de bienvenida de la app
-	 * cuando la autenticacion es OK
+	 * Servicio para obtener los datos necesarios de bienvenida de la app cuando la
+	 * autenticacion es OK
 	 *
 	 * @param data, parametros necesarios para obtener los datos de bienvenida
 	 * @return DTO con los datos configurados para la bienvenida de la app
@@ -165,7 +180,7 @@ public class AutenticacionService {
 	 * Metodo recursivo para obtener el item del menu principal
 	 *
 	 * @param items, contiene todos los items del menu
-	 * @param id, identificador del item principal a buscar
+	 * @param id,    identificador del item principal a buscar
 	 */
 	private MenuItemDTO findItemPrincipal(List<MenuItemDTO> items, String id) {
 		MenuItemDTO itemPadre = null;
@@ -183,4 +198,5 @@ public class AutenticacionService {
 		}
 		return itemPadre;
 	}
+
 }
