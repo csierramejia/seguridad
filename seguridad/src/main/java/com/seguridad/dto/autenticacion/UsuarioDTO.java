@@ -19,4 +19,10 @@ public class UsuarioDTO implements Serializable {
 
 	/** Son los nombres de los roles asignados al usuario */
 	private String roles;
+	
+	/** contraseña del usuario */
+	private String clave;
+	
+	/** Identifica si es el primer ingreso en el sistema */
+	private Long primerIngreso;
 }
