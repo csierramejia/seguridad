@@ -107,10 +107,7 @@ public class AutenticacionService {
 			// se construye el query para obtener todos los items del menu asociado al user
 			Query q = this.em.createNativeQuery(SQLConstant.GET_ITEMS_MENU);
 			q.setParameter(Numero.UNO.valueI, data.getIdUsuario());
-			q.setParameter(Numero.DOS.valueI, Estado.ACTIVO);
-			q.setParameter(Numero.TRES.valueI, AplicacionConstant.ID_APLICACION_BACKOFFICE);
-			q.setParameter(Numero.CUATRO.valueI, Estado.ACTIVO);
-			q.setParameter(Numero.CINCO.valueI, Estado.ACTIVO);
+			q.setParameter(Numero.DOS.valueI, AplicacionConstant.ID_APLICACION_BACKOFFICE);
 			List<Object[]> result = q.getResultList();
 
 			// se verifica si el usuario tiene roles
