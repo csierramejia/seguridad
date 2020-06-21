@@ -25,7 +25,7 @@ public class Builder<S, T> {
 		T destino = null;
 		try {
 			if (origen != null) {
-				destino = classDestino.newInstance();
+				destino = classDestino.getDeclaredConstructor().newInstance();
 				BeanUtils.copyProperties(origen, destino);
 			}
 		} catch (Exception e) {
@@ -42,7 +42,7 @@ public class Builder<S, T> {
 		try {
 			lstDestino = new ArrayList<>();
 			for (S origen : lstOrigen) {
-				T destino = classDestino.newInstance();
+				T destino = classDestino.getDeclaredConstructor().newInstance();
 				BeanUtils.copyProperties(origen, destino);
 				lstDestino.add(destino);
 			}
