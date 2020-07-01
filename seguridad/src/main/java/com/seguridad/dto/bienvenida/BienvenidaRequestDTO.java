@@ -13,4 +13,7 @@ public class BienvenidaRequestDTO implements Serializable {
 
 	/** identificador del Usuario autenticado en el sistema */
 	private Long idUsuario;
+	
+	/** Es el identificador de la app logueada */
+	private Integer idAplicacion;
 }

@@ -5,4 +5,5 @@ package com.seguridad.constant;
  */
 public class AplicacionConstant {
 	public static final Integer ID_APLICACION_BACKOFFICE = 1;
+	public static final Integer ID_APLICACION_VENTAS = 2;
 }
