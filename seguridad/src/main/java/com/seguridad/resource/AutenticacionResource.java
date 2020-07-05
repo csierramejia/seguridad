@@ -23,7 +23,7 @@ import io.swagger.annotations.ApiResponses;
  * localhost:puerto/auth/
  */
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/seguridad")
 public class AutenticacionResource {
 
 	/** Service para que contiene los procesos de negocio para la autenticacion */
