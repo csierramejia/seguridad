@@ -17,7 +17,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Greenwich.SR1</spring-cloud.version>
-        <repository.url>10013113/logiilue</repository.url>		
+        <repository.url>repositorio-jer</repository.url>		
 	</properties>
 
 	<dependencies>
