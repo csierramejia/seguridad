@@ -16,4 +16,20 @@ public class BienvenidaRequestDTO implements Serializable {
 	
 	/** Es el identificador de la app logueada */
 	private Integer idAplicacion;
+
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public Integer getIdAplicacion() {
+		return idAplicacion;
+	}
+
+	public void setIdAplicacion(Integer idAplicacion) {
+		this.idAplicacion = idAplicacion;
+	}
 }

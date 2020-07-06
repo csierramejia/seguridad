@@ -72,4 +72,68 @@ public class MenuItemDTO implements Serializable {
 		}
 		return item;
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
+	public String getRouterLink() {
+		return routerLink;
+	}
+
+	public void setRouterLink(String routerLink) {
+		this.routerLink = routerLink;
+	}
+
+	public boolean isExpanded() {
+		return expanded;
+	}
+
+	public void setExpanded(boolean expanded) {
+		this.expanded = expanded;
+	}
+
+	public List<MenuItemDTO> getItems() {
+		return items;
+	}
+
+	public void setItems(List<MenuItemDTO> items) {
+		this.items = items;
+	}
+
+	public List<MenuItemAccionDTO> getAcciones() {
+		return acciones;
+	}
+
+	public void setAcciones(List<MenuItemAccionDTO> acciones) {
+		this.acciones = acciones;
+	}
 }

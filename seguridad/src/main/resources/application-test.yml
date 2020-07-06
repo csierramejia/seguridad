@@ -34,7 +34,10 @@ management:
         
 #Port - If 0 get random port
 server:
- port: 8089
+#    servlet:
+#        contextPath: /api
+    port: 8089
+     
 #server: 
 # port: 0
  
