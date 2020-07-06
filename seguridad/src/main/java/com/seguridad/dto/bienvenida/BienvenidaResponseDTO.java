@@ -18,6 +18,14 @@ public class BienvenidaResponseDTO implements Serializable {
 	/** son los items del menu */
 	private List<MenuItemDTO> itemsMenu;
 
+	public List<MenuItemDTO> getItemsMenu() {
+		return itemsMenu;
+	}
+
+	public void setItemsMenu(List<MenuItemDTO> itemsMenu) {
+		this.itemsMenu = itemsMenu;
+	}
+
 	/**
 	 * Metodo que permite agregar un item para el menu de la app
 	 */

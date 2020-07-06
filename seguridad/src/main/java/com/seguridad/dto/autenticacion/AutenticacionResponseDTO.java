@@ -13,4 +13,12 @@ public class AutenticacionResponseDTO implements Serializable {
 
 	/** son los datos del usuario autenticado */
 	private UsuarioDTO usuario;
+
+	public UsuarioDTO getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(UsuarioDTO usuario) {
+		this.usuario = usuario;
+	}
 }

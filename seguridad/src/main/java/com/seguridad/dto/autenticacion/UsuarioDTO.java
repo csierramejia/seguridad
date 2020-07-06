@@ -25,4 +25,44 @@ public class UsuarioDTO implements Serializable {
 	
 	/** Identifica si es el primer ingreso en el sistema */
 	private Long primerIngreso;
+
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public String getNombreCompleto() {
+		return nombreCompleto;
+	}
+
+	public void setNombreCompleto(String nombreCompleto) {
+		this.nombreCompleto = nombreCompleto;
+	}
+
+	public String getRoles() {
+		return roles;
+	}
+
+	public void setRoles(String roles) {
+		this.roles = roles;
+	}
+
+	public String getClave() {
+		return clave;
+	}
+
+	public void setClave(String clave) {
+		this.clave = clave;
+	}
+
+	public Long getPrimerIngreso() {
+		return primerIngreso;
+	}
+
+	public void setPrimerIngreso(Long primerIngreso) {
+		this.primerIngreso = primerIngreso;
+	}
 }

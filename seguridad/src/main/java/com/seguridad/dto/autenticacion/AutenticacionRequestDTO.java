@@ -17,4 +17,20 @@ public class AutenticacionRequestDTO implements Serializable {
 
 	/** Es el usuario de ingreso al sistema */
 	private String usuarioIngreso;
+
+	public String getClaveIngreso() {
+		return claveIngreso;
+	}
+
+	public void setClaveIngreso(String claveIngreso) {
+		this.claveIngreso = claveIngreso;
+	}
+
+	public String getUsuarioIngreso() {
+		return usuarioIngreso;
+	}
+
+	public void setUsuarioIngreso(String usuarioIngreso) {
+		this.usuarioIngreso = usuarioIngreso;
+	}
 }
