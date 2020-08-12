@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.seguridad.constant.AplicacionConstant;
 import com.seguridad.constant.Estado;
 import com.seguridad.constant.MessagesBussinesKey;
 import com.seguridad.constant.Numero;
@@ -101,22 +100,12 @@ public class AutenticacionService {
 		if (data != null && data.getIdUsuario() != null) {
 
 			// se construye el response a retornar
-			BienvenidaResponseDTO response = new BienvenidaResponseDTO();
-			response.setItemsMenu(new ArrayList<>());
+			BienvenidaResponseDTO response = getModulos(data.getIdAplicacion());
 
 			// se construye el query para obtener todos los items del menu asociado al user
 			Query q = this.em.createNativeQuery(SQLConstant.GET_ITEMS_MENU);
 			q.setParameter(Numero.UNO.valueI, data.getIdUsuario());
-			if(data.getIdAplicacion() != null && data.getIdAplicacion()==AplicacionConstant.ID_APLICACION_VENTAS) {
-				q.setParameter(Numero.DOS.valueI, AplicacionConstant.ID_APLICACION_VENTAS);
-			}
-			else if(data.getIdAplicacion() != null && data.getIdAplicacion()==AplicacionConstant.ID_APLICACION_BACKOFFICE) {
-				q.setParameter(Numero.DOS.valueI, AplicacionConstant.ID_APLICACION_BACKOFFICE);
-			}
-			else {
-				//por sino se envio nada se consulta la aplicacion principal
-			q.setParameter(Numero.DOS.valueI, AplicacionConstant.ID_APLICACION_BACKOFFICE);
-			}
+			q.setParameter(Numero.DOS.valueI, data.getIdAplicacion());
 			List<Object[]> result = q.getResultList();
 
 			// se verifica si el usuario tiene roles
@@ -138,48 +127,72 @@ public class AutenticacionService {
 
 					// se procede a buscar recursivamente los datos del item padre
 					itemPadre = findItemPrincipal(response.getItemsMenu(), idItemPadre);
-
-					// si no existe el item padre se debe crear
-					if (itemPadre == null) {
-						itemPadre = new MenuItemDTO();
-						itemPadre.setId(idItemPadre);
-						itemPadre.setLabel(Util.getValue(item, Numero.UNO.valueI));
-						itemPadre.setTitle(Util.getValue(item, Numero.DOS.valueI));
-						itemPadre.setIcon(Util.getValue(item, Numero.ONCE.valueI));
-						itemPadre.setExpanded(true);
-
-						// se agrega el item padre al response
-						response.agregarItem(itemPadre);
-					} else {
-						// si existe el item padre se debe validar si ya tiene el hijo
+					if (itemPadre != null) {
 						itemHijo = itemPadre.getItemMenu(idItemHijo);
-					}
+						if (itemHijo == null) {
+							itemHijo = new MenuItemDTO();
+							itemHijo.setId(idItemHijo);
+							itemHijo.setLabel(Util.getValue(item, Numero.CUATRO.valueI));
+							itemHijo.setTitle(Util.getValue(item, Numero.CINCO.valueI));
+							itemHijo.setRouterLink(Util.getValue(item, Numero.SEIS.valueI));
+							itemHijo.setIcon(Util.getValue(item, Numero.DIEZ.valueI));
+							itemHijo.setExpanded(true);
+							itemPadre.agregarItem(itemHijo);
+						}
 
-					// se construye los datos del item hijo si no existe
-					if (itemHijo == null) {
-						itemHijo = new MenuItemDTO();
-						itemHijo.setId(idItemHijo);
-						itemHijo.setLabel(Util.getValue(item, Numero.CUATRO.valueI));
-						itemHijo.setTitle(Util.getValue(item, Numero.CINCO.valueI));
-						itemHijo.setRouterLink(Util.getValue(item, Numero.SEIS.valueI));
-						itemHijo.setIcon(Util.getValue(item, Numero.DIEZ.valueI));
-						itemHijo.setExpanded(true);
-						itemPadre.agregarItem(itemHijo);
-					}
-
-					// se obtiene el estado del accion esto para validar si se debe agregar
-					estadoAccion = Util.getValue(item, Numero.SIETE.valueI);
-					if (Estado.ACTIVO.equals(estadoAccion)) {
-						accion = new MenuItemAccionDTO();
-						accion.setIdAccion(Long.valueOf(Util.getValue(item, Numero.OCHO.valueI)));
-						accion.setNombre(Util.getValue(item, Numero.NUEVE.valueI));
-						itemHijo.agregarAccion(accion);
+						// se obtiene el estado del accion esto para validar si se debe agregar
+						estadoAccion = Util.getValue(item, Numero.SIETE.valueI);
+						if (Estado.ACTIVO.equals(estadoAccion)) {
+							accion = new MenuItemAccionDTO();
+							accion.setIdAccion(Long.valueOf(Util.getValue(item, Numero.OCHO.valueI)));
+							accion.setNombre(Util.getValue(item, Numero.NUEVE.valueI));
+							itemHijo.agregarAccion(accion);
+						}
 					}
 				}
 			}
 			return response;
 		}
 		return null;
+	}
+
+	/**
+	 * Metodo que permite consultar los modulos con sus submodulos
+	 */
+	private BienvenidaResponseDTO getModulos(Integer idAplicacion) throws Exception {
+
+		// es el response con los datos de los modulos a retornar
+		BienvenidaResponseDTO response = new BienvenidaResponseDTO();
+		response.setItemsMenu(new ArrayList<>());
+
+		// se procede a consultar los modulos del menu
+		Query q = this.em.createNativeQuery(SQLConstant.GET_MODULOS);
+		q.setParameter(Numero.UNO.valueI, idAplicacion);
+		List<Object[]> result = q.getResultList();
+		if (result != null && !result.isEmpty()) {
+
+			// se configura cada modulo
+			String idItemPadre;
+			MenuItemDTO modulo;
+			for (Object[] item : result) {
+				modulo = new MenuItemDTO();
+				modulo.setId(Util.getValue(item, Numero.ZERO.valueI));
+				modulo.setLabel(Util.getValue(item, Numero.UNO.valueI));
+				modulo.setTitle(Util.getValue(item, Numero.DOS.valueI));
+				modulo.setIcon(Util.getValue(item, Numero.TRES.valueI));
+				modulo.setExpanded(true);
+				idItemPadre = Util.getValue(item, Numero.CUATRO.valueI);
+				if (idItemPadre == null) {
+					response.agregarItem(modulo);
+				} else {
+					MenuItemDTO itemModulo = findItemPrincipal(response.getItemsMenu(), idItemPadre);
+					if (itemModulo != null) {
+						itemModulo.agregarItem(modulo);	
+					}
+				}
+			}
+		}
+		return response;
 	}
 
 	/**
@@ -204,5 +217,4 @@ public class AutenticacionService {
 		}
 		return itemPadre;
 	}
-
 }
