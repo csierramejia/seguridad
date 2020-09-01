@@ -224,7 +224,7 @@ public class AutenticacionService {
 				&& !Util.isNull(credenciales.getNumeroTelefono())) {
 
 			// se consulta el identificador del usuario que coincida con la clave-usuario
-			Query q = this.em.createNativeQuery(SQLConstant.GET_USER_AUTH);
+			Query q = this.em.createNativeQuery(SQLConstant.GET_USER_AUTH_MOBILE);
 			q.setParameter(Numero.UNO.valueI, credenciales.getCodigoIngreso());
 			List<Object> result = q.getResultList();
 
@@ -243,6 +243,7 @@ public class AutenticacionService {
 						usuario.setRoles(Util.getValue(data, Numero.DOS.valueI));
 						usuario.setPrimerIngreso(Long.valueOf(Util.getValue(data, Numero.TRES.valueI)));
 						usuario.setClave(Util.getValue(data, Numero.CUATRO.valueI));
+						usuario.setNumeroTelefono(Util.getValue(data, Numero.CINCO.valueI));
 						// se construye el response con los datos configurados
 						AutenticacionResponseDTO response = new AutenticacionResponseDTO();
 						response.setUsuario(usuario);

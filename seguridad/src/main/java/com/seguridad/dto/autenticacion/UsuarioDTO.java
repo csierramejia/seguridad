@@ -25,4 +25,6 @@ public class UsuarioDTO implements Serializable {
 	
 	/** Identifica si es el primer ingreso en el sistema */
 	private Long primerIngreso;
+	
+	private String numeroTelefono;
 }
