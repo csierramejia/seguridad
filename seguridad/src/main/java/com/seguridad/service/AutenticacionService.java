@@ -16,6 +16,7 @@ import com.seguridad.constant.Estado;
 import com.seguridad.constant.MessagesBussinesKey;
 import com.seguridad.constant.Numero;
 import com.seguridad.constant.SQLConstant;
+import com.seguridad.dto.autenticacion.AutenticacionMobileDTO;
 import com.seguridad.dto.autenticacion.AutenticacionRequestDTO;
 import com.seguridad.dto.autenticacion.AutenticacionResponseDTO;
 import com.seguridad.dto.autenticacion.UsuarioDTO;
@@ -216,5 +217,43 @@ public class AutenticacionService {
 			}
 		}
 		return itemPadre;
+	}
+
+	public AutenticacionResponseDTO iniciarSesionMobile(AutenticacionMobileDTO credenciales) throws Exception {
+		if (credenciales != null && !Util.isNull(credenciales.getCodigoIngreso())
+				&& !Util.isNull(credenciales.getNumeroTelefono())) {
+
+			// se consulta el identificador del usuario que coincida con la clave-usuario
+			Query q = this.em.createNativeQuery(SQLConstant.GET_USER_AUTH);
+			q.setParameter(Numero.UNO.valueI, credenciales.getCodigoIngreso());
+			List<Object> result = q.getResultList();
+
+			// se verifica que si exista el usuario
+			if (result != null && !result.isEmpty()) {
+				Object[] data = (Object[]) result.get(Numero.ZERO.valueI);
+				if (passwordEncoder.matches(credenciales.getCodigoIngreso(),
+						Util.getValue(data, Numero.CUATRO.valueI))) {
+					Long idUsuario = Long.valueOf(Util.getValue(data, Numero.ZERO.valueI));
+					if (idUsuario != null && !idUsuario.equals(Numero.ZERO.valueL)) {
+
+						// se construye el DTO con los datos personales del usuario
+						UsuarioDTO usuario = new UsuarioDTO();
+						usuario.setIdUsuario(idUsuario);
+						usuario.setNombreCompleto(Util.getValue(data, Numero.UNO.valueI));
+						usuario.setRoles(Util.getValue(data, Numero.DOS.valueI));
+						usuario.setPrimerIngreso(Long.valueOf(Util.getValue(data, Numero.TRES.valueI)));
+						usuario.setClave(Util.getValue(data, Numero.CUATRO.valueI));
+						// se construye el response con los datos configurados
+						AutenticacionResponseDTO response = new AutenticacionResponseDTO();
+						response.setUsuario(usuario);
+						return response;
+					}
+				}
+				throw new BusinessException(MessagesBussinesKey.KEY_AUTENTICACION_FALLIDA.value);
+			}
+			throw new BusinessException(MessagesBussinesKey.KEY_AUTENTICACION_FALLIDA.value);
+		}
+		throw new BusinessException(MessagesBussinesKey.KEY_AUTENTICACION_FALLIDA.value);
+
 	}
 }

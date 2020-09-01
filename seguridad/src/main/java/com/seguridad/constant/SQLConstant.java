@@ -20,6 +20,22 @@ public class SQLConstant {
 		+ "'AND UR.ID_ESTADO='" + Estado.ACTIVO
 		+ "'AND RO.ID_ESTADO='" + Estado.ACTIVO
 		+ "'GROUP BY 1,2";
+	
+	/** SQL para obtener los datos personales del usuario con base a sus credenciales*/
+	public static final String GET_USER_AUTH_MOBILE =
+		"SELECT "
+			  + "U.ID_USUARIO,"
+			  + "CONCAT(P.PRIMER_NOMBRE,' ',P.SEGUNDO_NOMBRE,' ',P.PRIMER_APELLIDO,' ',P.SEGUNDO_APELLIDO)AS NOMBRE,"
+			  + "STRING_AGG(DISTINCT RO.NOMBRE, ', ')AS ROLES, U.PRIMER_INGRESO, U.CLAVE "
+		+ "FROM PERSONAS P "
+		+ "JOIN USUARIOS U ON(U.ID_USUARIO=P.ID_PERSONA)"
+		+ "JOIN USUARIOS_ROLES_EMPRESAS UR ON(UR.ID_USUARIO=U.ID_USUARIO)"
+		+ "JOIN ROLES RO ON(RO.ID_ROL=UR.ID_ROL)"
+		+ "WHERE U.numero_telefono=? "
+		+ "AND U.ID_ESTADO='" + Estado.ACTIVO
+		+ "'AND UR.ID_ESTADO='" + Estado.ACTIVO
+		+ "'AND RO.ID_ESTADO='" + Estado.ACTIVO
+		+ "'GROUP BY 1,2";
 
 	/** SQL para obtener los items del menu parametrizados en el sistema*/
 	public static final String GET_ITEMS_MENU =
