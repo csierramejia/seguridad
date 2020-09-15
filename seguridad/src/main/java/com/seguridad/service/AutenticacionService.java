@@ -244,6 +244,7 @@ public class AutenticacionService {
 						usuario.setPrimerIngreso(Long.valueOf(Util.getValue(data, Numero.TRES.valueI)));
 						usuario.setClave(Util.getValue(data, Numero.CUATRO.valueI));
 						usuario.setNumeroTelefono(Util.getValue(data, Numero.CINCO.valueI));
+						usuario.setCorreo(consultarCorreoPorPersona(usuario.getIdUsuario()));
 						// se construye el response con los datos configurados
 						AutenticacionResponseDTO response = new AutenticacionResponseDTO();
 						response.setUsuario(usuario);
@@ -256,5 +257,17 @@ public class AutenticacionService {
 		}
 		throw new BusinessException(MessagesBussinesKey.KEY_AUTENTICACION_FALLIDA.value);
 
+	}
+
+	private String consultarCorreoPorPersona(Long idUsuario) {
+		try {
+			String correo=null;
+			Query q=em.createNativeQuery(SQLConstant.SELECT_MAIL_ID_PERSON).setParameter("id", idUsuario);
+			correo=(String) q.getSingleResult();
+			return correo;
+			
+		}catch (Exception e) {
+			return null;
+		}
 	}
 }

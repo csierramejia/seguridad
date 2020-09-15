@@ -27,4 +27,6 @@ public class UsuarioDTO implements Serializable {
 	private Long primerIngreso;
 	
 	private String numeroTelefono;
+	
+	private String correo;
 }

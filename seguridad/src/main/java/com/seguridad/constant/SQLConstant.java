@@ -33,9 +33,9 @@ public class SQLConstant {
 		+ "JOIN ROLES RO ON(RO.ID_ROL=UR.ID_ROL)"
 		+ "WHERE U.numero_telefono=? "
 		+ "AND U.ID_ESTADO='" + Estado.ACTIVO
-		+ "'AND UR.ID_ESTADO='" + Estado.ACTIVO
-		+ "'AND RO.ID_ESTADO='" + Estado.ACTIVO
-		+ "'GROUP BY 1,2";
+		+ "' AND UR.ID_ESTADO='" + Estado.ACTIVO
+		+ "' AND RO.ID_ESTADO='" + Estado.ACTIVO
+		+ "' GROUP BY 1,2";
 
 	/** SQL para obtener los items del menu parametrizados en el sistema*/
 	public static final String GET_ITEMS_MENU =
@@ -67,4 +67,6 @@ public class SQLConstant {
 
 	/** SQL para obtener los modulos del menu*/
 	public static final String GET_MODULOS = "SELECT ID_RECURSO,NOMBRE,DESCRIPCION,ICONO,ID_RECURSO_PADRE FROM RECURSOS WHERE ID_ESTADO='" + Estado.ACTIVO + "' AND (ID_RECURSO_PADRE IS NULL OR URL IS NULL) AND ID_APLICACION=? ORDER BY NOMBRE";
+
+	public static final String SELECT_MAIL_ID_PERSON = "select P.correo_electronico from personas p where p.id_persona=:id";
 }
