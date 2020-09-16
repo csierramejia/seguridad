@@ -225,7 +225,7 @@ public class AutenticacionService {
 
 			// se consulta el identificador del usuario que coincida con la clave-usuario
 			Query q = this.em.createNativeQuery(SQLConstant.GET_USER_AUTH_MOBILE);
-			q.setParameter(Numero.UNO.valueI, credenciales.getCodigoIngreso());
+			q.setParameter(Numero.UNO.valueI, credenciales.getNumeroTelefono());
 			List<Object> result = q.getResultList();
 
 			// se verifica que si exista el usuario
