@@ -232,7 +232,7 @@ public class AutenticacionService {
 			if (result != null && !result.isEmpty()) {
 				Object[] data = (Object[]) result.get(Numero.ZERO.valueI);
 				if (passwordEncoder.matches(credenciales.getCodigoIngreso(),
-						Util.getValue(data, Numero.CUATRO.valueI))) {
+						Util.getValue(data, Numero.TRES.valueI))) {
 					Long idUsuario = Long.valueOf(Util.getValue(data, Numero.ZERO.valueI));
 					if (idUsuario != null && !idUsuario.equals(Numero.ZERO.valueL)) {
 
