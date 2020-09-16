@@ -240,10 +240,10 @@ public class AutenticacionService {
 						UsuarioDTO usuario = new UsuarioDTO();
 						usuario.setIdUsuario(idUsuario);
 						usuario.setNombreCompleto(Util.getValue(data, Numero.UNO.valueI));
-						usuario.setRoles(Util.getValue(data, Numero.DOS.valueI));
-						usuario.setPrimerIngreso(Long.valueOf(Util.getValue(data, Numero.TRES.valueI)));
-						usuario.setClave(Util.getValue(data, Numero.CUATRO.valueI));
-						usuario.setNumeroTelefono(Util.getValue(data, Numero.CINCO.valueI));
+						usuario.setRoles(null);
+						usuario.setPrimerIngreso(Long.valueOf(Util.getValue(data, Numero.DOS.valueI)));
+						usuario.setClave(Util.getValue(data, Numero.TRES.valueI));
+						usuario.setNumeroTelefono(Util.getValue(data, Numero.CUATRO.valueI));
 						usuario.setCorreo(consultarCorreoPorPersona(usuario.getIdUsuario()));
 						// se construye el response con los datos configurados
 						AutenticacionResponseDTO response = new AutenticacionResponseDTO();
