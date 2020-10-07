@@ -19,14 +19,22 @@ public class UsuarioDTO implements Serializable {
 
 	/** Son los nombres de los roles asignados al usuario */
 	private String roles;
-	
+
+	/** Son los identificadores de cada rol que tiene el usuario */
+	private String idRoles;
+
 	/** contraseña del usuario */
 	private String clave;
-	
+
 	/** Identifica si es el primer ingreso en el sistema */
 	private Long primerIngreso;
-	
+
+	/** Nro de telefeno del usaurio autenticado */
 	private String numeroTelefono;
-	
+
+	/** correo del usaurio autenticado */
 	private String correo;
+
+	/** Indica si el usuario autenticado tiene rol de administrador */
+	private boolean administrador;
 }

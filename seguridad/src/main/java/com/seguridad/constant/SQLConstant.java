@@ -10,7 +10,10 @@ public class SQLConstant {
 		"SELECT "
 			  + "U.ID_USUARIO,"
 			  + "CONCAT(P.PRIMER_NOMBRE,' ',P.SEGUNDO_NOMBRE,' ',P.PRIMER_APELLIDO,' ',P.SEGUNDO_APELLIDO)AS NOMBRE,"
-			  + "STRING_AGG(DISTINCT RO.NOMBRE, ', ')AS ROLES, U.PRIMER_INGRESO, U.CLAVE "
+			  + "STRING_AGG(DISTINCT RO.NOMBRE, ', ')AS ROLES,"
+			  + "U.PRIMER_INGRESO,"
+			  + "U.CLAVE,"
+			  + "STRING_AGG(DISTINCT RO.ID_ROL\\:\\:VARCHAR, ',')AS ID_ROLES "
 		+ "FROM PERSONAS P "
 		+ "JOIN USUARIOS U ON(U.ID_USUARIO=P.ID_PERSONA)"
 		+ "JOIN USUARIOS_ROLES_EMPRESAS UR ON(UR.ID_USUARIO=U.ID_USUARIO)"
@@ -20,7 +23,7 @@ public class SQLConstant {
 		+ "'AND UR.ID_ESTADO='" + Estado.ACTIVO
 		+ "'AND RO.ID_ESTADO='" + Estado.ACTIVO
 		+ "'GROUP BY 1,2";
-	
+
 	/** SQL para obtener los datos personales del usuario con base a sus credenciales*/
 	public static final String GET_USER_AUTH_MOBILE =
 		"SELECT "
