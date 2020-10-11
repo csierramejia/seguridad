@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: seguridad
+  cloud:
+    config:
+      enabled: true
+      fail-fast: true
+      uri: http://configserver.logiiblue.com:8888
+  profiles:
+    active: dev
+    
+health:
+  config:
+    time-to-live: 60000
+    
+management:
+  endpoint:
+    features:
+      cache:
+        time-to-live: 60000
+        
+    
