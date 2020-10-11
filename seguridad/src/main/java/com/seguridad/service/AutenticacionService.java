@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.seguridad.constant.Constants;
 import com.seguridad.constant.Estado;
 import com.seguridad.constant.MessagesBussinesKey;
 import com.seguridad.constant.Numero;
@@ -77,6 +78,11 @@ public class AutenticacionService {
 						usuario.setRoles(Util.getValue(data, Numero.DOS.valueI));
 						usuario.setPrimerIngreso(Long.valueOf(Util.getValue(data, Numero.TRES.valueI)));
 						usuario.setClave(Util.getValue(data, Numero.CUATRO.valueI));
+						usuario.setIdRoles(Util.getValue(data, Numero.CINCO.valueI));
+
+						// se verifica si el usuario tiene ROL administrador
+						verificarRolAdministrador(usuario);
+
 						// se construye el response con los datos configurados
 						AutenticacionResponseDTO response = new AutenticacionResponseDTO();
 						response.setUsuario(usuario);
@@ -268,6 +274,22 @@ public class AutenticacionService {
 			
 		}catch (Exception e) {
 			return null;
+		}
+	}
+
+	/**
+	 * Metodo que permite verificar si el usuario tiene rol administrador
+	 */
+	private void verificarRolAdministrador(UsuarioDTO usuario) {
+		String idRoles = usuario.getIdRoles();
+		if (!Util.isNull(idRoles)) {
+			String[] roles = usuario.getIdRoles().split(Constants.COMA);
+			for (String idROL : roles) {
+				if (Constants.ID_ADMINISTRADOR.equals(idROL)) {
+					usuario.setAdministrador(true);
+					return;
+				}
+			}
 		}
 	}
 }
