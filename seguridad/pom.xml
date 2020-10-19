@@ -97,4 +97,12 @@
 		</plugins>
 	</build>
 
+<distributionManagement>
+  <repository>
+    <id>logii-domain--maven-central-store</id>
+    <name>logii-domain--maven-central-store</name>
+    <url>https://logii-domain-814328356409.d.codeartifact.us-east-2.amazonaws.com/maven/maven-central-store/</url>
+  </repository>
+</distributionManagement>
+
 </project>

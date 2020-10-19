@@ -5,9 +5,9 @@ spring:
     config:
       enabled: true
       fail-fast: true
-      uri: http://configserver.logiiblue.com:8888
+      uri: http://ecsalb02-781733494.us-east-1.elb.amazonaws.com:8888
   profiles:
-    active: dev
+    active: test
     
 health:
   config:
