@@ -8,8 +8,8 @@ spring:
     driver-class-name: org.postgresql.Driver
     hikari:
       minimum-idle: 1
-      maximum-pool-size: 6
-      idle-timeout: 10000
+      maximum-pool-size: 5
+      idle-timeout: 20000
       poolName: poolSeguridad    
   jpa:
     generate-ddl: true  
