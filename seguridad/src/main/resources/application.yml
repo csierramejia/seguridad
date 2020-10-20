@@ -9,7 +9,7 @@ spring:
     hikari:
       minimum-idle: 1
       maximum-pool-size: 5
-      idle-timeout: 20000
+      idle-timeout: 10000
       poolName: poolSeguridad    
   jpa:
     generate-ddl: true  
