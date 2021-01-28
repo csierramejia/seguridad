@@ -113,7 +113,7 @@ public class AutenticacionService {
 		if (data != null && data.getIdUsuario() != null) {
 
 			// se construye el response a retornar
-			BienvenidaResponseDTO response = getModulos(data.getIdAplicacion());
+			BienvenidaResponseDTO response = getModulos(data.getIdAplicacion(), data.getIdUsuario());
 
 			// se construye el query para obtener todos los items del menu asociado al user
 			Query q = this.em.createNativeQuery(SQLConstant.GET_ITEMS_MENU);
@@ -172,7 +172,7 @@ public class AutenticacionService {
 	/**
 	 * Metodo que permite consultar los modulos con sus submodulos
 	 */
-	private BienvenidaResponseDTO getModulos(Integer idAplicacion) throws Exception {
+	private BienvenidaResponseDTO getModulos(Integer idAplicacion, Long idUsuario) throws Exception {
 
 		// es el response con los datos de los modulos a retornar
 		BienvenidaResponseDTO response = new BienvenidaResponseDTO();
@@ -180,27 +180,32 @@ public class AutenticacionService {
 
 		// se procede a consultar los modulos del menu
 		Query q = this.em.createNativeQuery(SQLConstant.GET_MODULOS);
-		q.setParameter(Numero.UNO.valueI, idAplicacion);
+		q.setParameter(Numero.UNO.valueI, idUsuario);
+		q.setParameter(Numero.DOS.valueI, idAplicacion);
 		List<Object[]> result = q.getResultList();
 		if (result != null && !result.isEmpty()) {
 
 			// se configura cada modulo
 			String idItemPadre;
 			MenuItemDTO modulo;
+			boolean exist;
 			for (Object[] item : result) {
-				modulo = new MenuItemDTO();
-				modulo.setId(Util.getValue(item, Numero.ZERO.valueI));
-				modulo.setLabel(Util.getValue(item, Numero.UNO.valueI));
-				modulo.setTitle(Util.getValue(item, Numero.DOS.valueI));
-				modulo.setIcon(Util.getValue(item, Numero.TRES.valueI));
-				modulo.setExpanded(true);
-				idItemPadre = Util.getValue(item, Numero.CUATRO.valueI);
-				if (idItemPadre == null) {
-					response.agregarItem(modulo);
-				} else {
-					MenuItemDTO itemModulo = findItemPrincipal(response.getItemsMenu(), idItemPadre);
-					if (itemModulo != null) {
-						itemModulo.agregarItem(modulo);	
+				exist = (boolean) item[Numero.CINCO.valueI];
+				if (exist) {
+					modulo = new MenuItemDTO();
+					modulo.setId(Util.getValue(item, Numero.ZERO.valueI));
+					modulo.setLabel(Util.getValue(item, Numero.UNO.valueI));
+					modulo.setTitle(Util.getValue(item, Numero.DOS.valueI));
+					modulo.setIcon(Util.getValue(item, Numero.TRES.valueI));
+					modulo.setExpanded(true);
+					idItemPadre = Util.getValue(item, Numero.CUATRO.valueI);
+					if (idItemPadre == null) {
+						response.agregarItem(modulo);
+					} else {
+						MenuItemDTO itemModulo = findItemPrincipal(response.getItemsMenu(), idItemPadre);
+						if (itemModulo != null) {
+							itemModulo.agregarItem(modulo);
+						}
 					}
 				}
 			}
