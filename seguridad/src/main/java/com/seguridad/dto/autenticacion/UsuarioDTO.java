@@ -37,4 +37,11 @@ public class UsuarioDTO implements Serializable {
 
 	/** Indica si el usuario autenticado tiene rol de administrador */
 	private boolean administrador;
+	
+	/** identificador de la oficina a la que pertenece el usuario */
+	private Long idOficina;
+	
+	/** identificador del punto de venta al que pertenece el usuario */
+	private Long idPuntoVenta;
+
 }

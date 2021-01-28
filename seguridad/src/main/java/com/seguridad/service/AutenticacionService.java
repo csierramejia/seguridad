@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
 
 import com.seguridad.constant.Constants;
 import com.seguridad.constant.Estado;
@@ -20,6 +22,7 @@ import com.seguridad.constant.SQLConstant;
 import com.seguridad.dto.autenticacion.AutenticacionMobileDTO;
 import com.seguridad.dto.autenticacion.AutenticacionRequestDTO;
 import com.seguridad.dto.autenticacion.AutenticacionResponseDTO;
+import com.seguridad.dto.autenticacion.UbicacionDTO;
 import com.seguridad.dto.autenticacion.UsuarioDTO;
 import com.seguridad.dto.bienvenida.BienvenidaRequestDTO;
 import com.seguridad.dto.bienvenida.BienvenidaResponseDTO;
@@ -82,6 +85,9 @@ public class AutenticacionService {
 
 						// se verifica si el usuario tiene ROL administrador
 						verificarRolAdministrador(usuario);
+						UbicacionDTO programacion = obtenerProgramacionUsuario(idUsuario);
+						usuario.setIdOficina(programacion.getIdOficina());
+						usuario.setIdPuntoVenta(programacion.getIdPuntoVenta());
 
 						// se construye el response con los datos configurados
 						AutenticacionResponseDTO response = new AutenticacionResponseDTO();
@@ -252,7 +258,10 @@ public class AutenticacionService {
 						usuario.setNumeroTelefono(Util.getValue(data, Numero.CUATRO.valueI));
 						usuario.setCorreo(consultarCorreoPorPersona(usuario.getIdUsuario()));
 						// se construye el response con los datos configurados
-						AutenticacionResponseDTO response = new AutenticacionResponseDTO();
+						UbicacionDTO programacion = obtenerProgramacionUsuario(idUsuario);
+						usuario.setIdOficina(programacion.getIdOficina());
+						usuario.setIdPuntoVenta(programacion.getIdPuntoVenta());
+                		AutenticacionResponseDTO response = new AutenticacionResponseDTO();
 						response.setUsuario(usuario);
 						return response;
 					}
@@ -292,4 +301,29 @@ public class AutenticacionService {
 			}
 		}
 	}
+	
+	
+	/**
+	 * Metodo que permite consultar la ubicacion del usuario
+	 */
+	private UbicacionDTO obtenerProgramacionUsuario(Long idUsuario) throws Exception {
+
+		UbicacionDTO programacion = new UbicacionDTO();
+		try {
+		Query q = this.em.createNativeQuery(SQLConstant.GET_PROGRAMACION_VENDEDOR);
+		q.setParameter("idUsuario", idUsuario);
+		Object[] result = (Object[]) q.getSingleResult();
+	     if (result != null) {
+				programacion.setIdOficina((Util.getValue(result, Numero.ZERO.valueI) != null ? Long.valueOf(Util.getValue(result, Numero.ZERO.valueI)): 0));
+				programacion.setIdPuntoVenta((Util.getValue(result, Numero.UNO.valueI) != null ? Long.valueOf(Util.getValue(result, Numero.UNO.valueI)): 0));
+			}
+		}catch(NoResultException e) {
+			
+			throw new BusinessException(MessagesBussinesKey.KEY_PROGRAMACION_NULA.value);
+
+		}
+		
+		return programacion;
+	}
+
 }

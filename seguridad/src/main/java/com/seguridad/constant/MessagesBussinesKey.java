@@ -6,7 +6,9 @@ package com.seguridad.constant;
 public enum MessagesBussinesKey {
 
 	/** 400 - Credenciales incorrectas. Inténtalo de nuevo. */
-	KEY_AUTENTICACION_FALLIDA("security-0001");
+	KEY_AUTENTICACION_FALLIDA("security-0001"),
+	KEY_PROGRAMACION_NULA("security-0002");
+	
 
 	public final String value;
 	private MessagesBussinesKey(String value) {
