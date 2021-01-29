@@ -85,9 +85,11 @@ public class AutenticacionService {
 
 						// se verifica si el usuario tiene ROL administrador
 						verificarRolAdministrador(usuario);
+						if(!usuario.isAdministrador()) {
 						UbicacionDTO programacion = obtenerProgramacionUsuario(idUsuario);
 						usuario.setIdOficina(programacion.getIdOficina());
 						usuario.setIdPuntoVenta(programacion.getIdPuntoVenta());
+						}
 
 						// se construye el response con los datos configurados
 						AutenticacionResponseDTO response = new AutenticacionResponseDTO();
@@ -263,9 +265,7 @@ public class AutenticacionService {
 						usuario.setNumeroTelefono(Util.getValue(data, Numero.CUATRO.valueI));
 						usuario.setCorreo(consultarCorreoPorPersona(usuario.getIdUsuario()));
 						// se construye el response con los datos configurados
-						UbicacionDTO programacion = obtenerProgramacionUsuario(idUsuario);
-						usuario.setIdOficina(programacion.getIdOficina());
-						usuario.setIdPuntoVenta(programacion.getIdPuntoVenta());
+						
                 		AutenticacionResponseDTO response = new AutenticacionResponseDTO();
 						response.setUsuario(usuario);
 						return response;
