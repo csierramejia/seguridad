@@ -266,6 +266,10 @@ public class AutenticacionService {
 						usuario.setCorreo(consultarCorreoPorPersona(usuario.getIdUsuario()));
 						// se construye el response con los datos configurados
 						
+							UbicacionDTO programacion = obtenerProgramacionUsuario(idUsuario);
+							usuario.setIdOficina(programacion.getIdOficina());
+							usuario.setIdPuntoVenta(programacion.getIdPuntoVenta());
+						
                 		AutenticacionResponseDTO response = new AutenticacionResponseDTO();
 						response.setUsuario(usuario);
 						return response;
@@ -319,8 +323,8 @@ public class AutenticacionService {
 		q.setParameter("idUsuario", idUsuario);
 		Object[] result = (Object[]) q.getSingleResult();
 	     if (result != null) {
-				programacion.setIdOficina((Util.getValue(result, Numero.ZERO.valueI) != null ? Long.valueOf(Util.getValue(result, Numero.ZERO.valueI)): 0));
-				programacion.setIdPuntoVenta((Util.getValue(result, Numero.UNO.valueI) != null ? Long.valueOf(Util.getValue(result, Numero.UNO.valueI)): 0));
+				programacion.setIdOficina((Util.getValue(result, Numero.ZERO.valueI) != null ? Long.valueOf(Util.getValue(result, Numero.ZERO.valueI)): null));
+				programacion.setIdPuntoVenta((Util.getValue(result, Numero.UNO.valueI) != null ? Long.valueOf(Util.getValue(result, Numero.UNO.valueI)): null));
 			}
 		}catch(NoResultException e) {
 			
