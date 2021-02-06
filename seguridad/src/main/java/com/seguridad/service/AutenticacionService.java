@@ -259,16 +259,21 @@ public class AutenticacionService {
 						UsuarioDTO usuario = new UsuarioDTO();
 						usuario.setIdUsuario(idUsuario);
 						usuario.setNombreCompleto(Util.getValue(data, Numero.UNO.valueI));
-						usuario.setRoles(null);
 						usuario.setPrimerIngreso(Long.valueOf(Util.getValue(data, Numero.DOS.valueI)));
 						usuario.setClave(Util.getValue(data, Numero.TRES.valueI));
 						usuario.setNumeroTelefono(Util.getValue(data, Numero.CUATRO.valueI));
 						usuario.setCorreo(consultarCorreoPorPersona(usuario.getIdUsuario()));
-						// se construye el response con los datos configurados
+						usuario.setRoles(Util.getValue(data, Numero.CINCO.valueI));
+						usuario.setIdRoles(Util.getValue(data, Numero.SEIS.valueI));
 						
-							UbicacionDTO programacion = obtenerProgramacionUsuario(idUsuario);
-							usuario.setIdOficina(programacion.getIdOficina());
-							usuario.setIdPuntoVenta(programacion.getIdPuntoVenta());
+						// se construye el response con los datos configurados
+						// se verifica si el usuario tiene ROL administrador
+						verificarRolAdministrador(usuario);
+						if(!usuario.isAdministrador()) {
+						UbicacionDTO programacion = obtenerProgramacionUsuario(idUsuario);
+						usuario.setIdOficina(programacion.getIdOficina());
+						usuario.setIdPuntoVenta(programacion.getIdPuntoVenta());
+						}
 						
                 		AutenticacionResponseDTO response = new AutenticacionResponseDTO();
 						response.setUsuario(usuario);
