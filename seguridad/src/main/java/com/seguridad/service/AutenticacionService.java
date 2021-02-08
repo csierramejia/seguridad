@@ -268,12 +268,12 @@ public class AutenticacionService {
 						
 						// se construye el response con los datos configurados
 						// se verifica si el usuario tiene ROL administrador
-						verificarRolAdministrador(usuario);
+						/*verificarRolAdministrador(usuario);
 						if(!usuario.isAdministrador()) {
 						UbicacionDTO programacion = obtenerProgramacionUsuario(idUsuario);
 						usuario.setIdOficina(programacion.getIdOficina());
 						usuario.setIdPuntoVenta(programacion.getIdPuntoVenta());
-						}
+						}*/
 						
                 		AutenticacionResponseDTO response = new AutenticacionResponseDTO();
 						response.setUsuario(usuario);
