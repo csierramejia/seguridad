@@ -43,5 +43,8 @@ public class UsuarioDTO implements Serializable {
 	
 	/** identificador del punto de venta al que pertenece el usuario */
 	private Long idPuntoVenta;
+	
+	/** Almacena la hora final de programación*/ 
+	private String horaFinal;
 
 }

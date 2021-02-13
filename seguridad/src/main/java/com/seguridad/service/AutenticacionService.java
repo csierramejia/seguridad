@@ -13,7 +13,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-
 import com.seguridad.constant.Constants;
 import com.seguridad.constant.Estado;
 import com.seguridad.constant.MessagesBussinesKey;
@@ -49,6 +48,7 @@ public class AutenticacionService {
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+	
 
 	/**
 	 * Servicio que soporta el proceso de negocio para la autenticacion en el
@@ -89,6 +89,7 @@ public class AutenticacionService {
 						UbicacionDTO programacion = obtenerProgramacionUsuario(idUsuario);
 						usuario.setIdOficina(programacion.getIdOficina());
 						usuario.setIdPuntoVenta(programacion.getIdPuntoVenta());
+						usuario.setHoraFinal(programacion.getHoraFinal());
 						}
 
 						// se construye el response con los datos configurados
@@ -330,7 +331,8 @@ public class AutenticacionService {
 	     if (result != null) {
 				programacion.setIdOficina((Util.getValue(result, Numero.ZERO.valueI) != null ? Long.valueOf(Util.getValue(result, Numero.ZERO.valueI)): null));
 				programacion.setIdPuntoVenta((Util.getValue(result, Numero.UNO.valueI) != null ? Long.valueOf(Util.getValue(result, Numero.UNO.valueI)): null));
-			}
+				programacion.setHoraFinal((Util.getValue(result, Numero.DOS.valueI) != null ? String.valueOf(Util.getValue(result, Numero.DOS.valueI)): null));
+	     }
 		}catch(NoResultException e) {
 			
 			throw new BusinessException(MessagesBussinesKey.KEY_PROGRAMACION_NULA.value);
