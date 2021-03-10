@@ -63,7 +63,7 @@ public class SQLConstant {
 		+ "'AND RRA.ID_ESTADO='" + Estado.ACTIVO
 		+ "'AND RE.ID_ESTADO='"+ Estado.ACTIVO
 		+ "'AND REP.ID_ESTADO='"+ Estado.ACTIVO
-		+ "'ORDER BY RE.NOMBRE ASC,REP.NOMBRE ASC";
+		+ "'ORDER BY RE.URL DESC NULLS FIRST, RE.NOMBRE ASC,REP.NOMBRE ASC";
 
 	/** SQL para obtener los modulos del menu*/
 	public static final String GET_MODULOS =
