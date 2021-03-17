@@ -85,7 +85,7 @@ public class AutenticacionService {
 
 						// se verifica si el usuario tiene ROL administrador
 						verificarRolAdministrador(usuario);
-						if(!usuario.isAdministrador()) {
+						if(obtenerProgramacionRol(idUsuario)) {
 						UbicacionDTO programacion = obtenerProgramacionUsuario(idUsuario);
 						usuario.setIdOficina(programacion.getIdOficina());
 						usuario.setIdPuntoVenta(programacion.getIdPuntoVenta());
@@ -342,4 +342,19 @@ public class AutenticacionService {
 		return programacion;
 	}
 
+	/**
+	 * Metodo que permite validar si un rol tiene programación asociada
+	 * @param idUsuario
+	 * @return boolean
+	 * @throws Exception
+	 */
+	private Boolean obtenerProgramacionRol(Long idUsuario) throws Exception {
+		Query q = this.em.createNativeQuery(SQLConstant.GET_ROL_PROGRAMACION);
+			q.setParameter("idUsuario", idUsuario);
+			return  (boolean) q.getSingleResult();	
+			
+	}
+	
+	
+	
 }
