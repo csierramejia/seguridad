@@ -50,8 +50,10 @@ public class AutenticacionResource {
 		try {
 			return Util.getResponseSuccessful(this.autenticacionService.iniciarSesion(credenciales));
 		} catch (BusinessException e) {
+			e.printStackTrace();
 			return Util.getResponseBadRequest(e.getMessage());
 		} catch (Exception e) {
+			e.printStackTrace();
 			return Util.getResponseError(AutenticacionResource.class.getSimpleName() + ".iniciarSesion ", e.getMessage());
 		}
 	}
