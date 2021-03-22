@@ -60,6 +60,7 @@ public class AutenticacionService {
 	public AutenticacionResponseDTO iniciarSesion(AutenticacionRequestDTO credenciales) throws Exception {
 		if (credenciales != null && !Util.isNull(credenciales.getClaveIngreso())
 				&& !Util.isNull(credenciales.getUsuarioIngreso())) {
+			System.out.println("usuario " + credenciales.getUsuarioIngreso());
 
 			// se consulta el identificador del usuario que coincida con la clave-usuario
 			Query q = this.em.createNativeQuery(SQLConstant.GET_USER_AUTH);
